@@ -17,6 +17,14 @@ const winningpos = [
    [2,4,6]
 ];
 
+function removingcolor(){
+    winningpos.forEach((position)=>{
+        boxes[position[0]].classList.remove("win");
+        boxes[position[1]].classList.remove("win");
+        boxes[position[2]].classList.remove("win");
+    })
+}
+
 init();
 function init(){
     currentplayer = "X";
@@ -27,9 +35,7 @@ function init(){
         })
     newgamebtn.classList.remove("active");
     gameinfo.innerText = `Current Player - ${currentplayer}`;
-    boxes.forEach((box, index) => {
-        box.innerHTML = "";
-    })
+    removingcolor();
 }
 
 boxes.forEach((box, index) =>{
@@ -59,7 +65,26 @@ function swapturn(){
 }
 
 function checkgameover(){
+    let answer = "";
+    winningpos.forEach((position) => {
+        if((gamegrid[position[0]] !== "" || gamegrid[position[1]] !== "" || gamegrid[position[2]] !== "" ) &&
+        (gamegrid[position[0]] === gamegrid[position[1]]) && (gamegrid[position[1]] === gamegrid[position[2]])){
+            if(gamegrid[position[0]] === "X"){
+                answer = "X";
+            }
+            else{
+                answer = "O";
+            }
 
-}
+            boxes[position[0]].classList.add("win");
+            boxes[position[1]].classList.add("win");
+            boxes[position[2]].classList.add("win");
+        }
+    });
 
-newgamebtn.addEventListener("click", init)
+    if(answer!==""){
+        newgamebtn.classList.add("active");
+    }
+}   
+
+newgamebtn.addEventListener("click", init) 
