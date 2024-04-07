@@ -21,6 +21,10 @@ init();
 function init(){
     currentplayer = "X";
     gamegrid = ["","","","","","","","",""];
+    boxes.forEach((box, index) => {
+        box.innerHTML = "";
+        boxes[index].style.pointerEvents = "all";
+        })
     newgamebtn.classList.remove("active");
     gameinfo.innerText = `Current Player - ${currentplayer}`;
     boxes.forEach((box, index) => {
