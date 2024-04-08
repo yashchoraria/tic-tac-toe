@@ -1,7 +1,8 @@
 const boxes = document.querySelectorAll(".box");
 const gameinfo = document.querySelector(".game-info");
 const newgamebtn = document.querySelector(".btn");
-
+const maingame = document.querySelector(".tic-tac-toe");
+const gameOverPopup = document.querySelector(".game-over-display");
 
 let currentplayer;
 let gamegrid;
@@ -36,6 +37,8 @@ function init(){
     newgamebtn.classList.remove("active");
     gameinfo.innerText = `Current Player - ${currentplayer}`;
     removingcolor();
+    maingame.classList.remove("hidden");
+    gameOverPopup.classList.remove("active");
 }
 
 boxes.forEach((box, index) =>{
@@ -84,7 +87,18 @@ function checkgameover(){
 
     if(answer!==""){
         newgamebtn.classList.add("active");
+        gameover();
     }
 }   
 
-newgamebtn.addEventListener("click", init) 
+function gameover(){
+    maingame.classList.add("hidden");
+    gameOverPopup.classList.add("active");
+    const winnerText = document.querySelector(".game-over-display p.winner");
+    winnerText.innerText = `Player ${currentplayer} wins`;
+    const restartBtn = document.querySelector(".game-over-display.restart");
+    restartBtn.addEventListener("click", init);
+}
+
+
+newgamebtn.addEventListener("click", init);
