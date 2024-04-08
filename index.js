@@ -4,6 +4,7 @@ const newgamebtn = document.querySelector(".btn");
 const maingame = document.querySelector(".tic-tac-toe");
 const gameOverPopup = document.querySelector(".game-over-display");
 
+let answer = "";
 let currentplayer;
 let gamegrid;
 
@@ -68,7 +69,7 @@ function swapturn(){
 }
 
 function checkgameover(){
-    let answer = "";
+    answer = "";
     winningpos.forEach((position) => {
         if((gamegrid[position[0]] !== "" || gamegrid[position[1]] !== "" || gamegrid[position[2]] !== "" ) &&
         (gamegrid[position[0]] === gamegrid[position[1]]) && (gamegrid[position[1]] === gamegrid[position[2]])){
@@ -95,7 +96,7 @@ function gameover(){
     maingame.classList.add("hidden");
     gameOverPopup.classList.add("active");
     const winnerText = document.querySelector(".game-over-display p.winner");
-    winnerText.innerText = `Player ${currentplayer} wins`;
+    winnerText.innerText = `Player ${answer} wins`;
     const restartBtn = document.querySelector(".game-over-display.restart");
     restartBtn.addEventListener("click", init);
 }
